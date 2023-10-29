@@ -4,16 +4,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.file.ClosedFileSystemException;
+import java.util.List;
 
+import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+
+import java.util.ArrayList;
 
 public class WeatherControllerFX {
     @FXML
@@ -23,7 +27,7 @@ public class WeatherControllerFX {
     private Label welcomeText;
 
     @FXML
-    private Label weatherInfoLabel;
+    private VBox vboxContainer;
 
     @FXML
     protected void onSearchButtonClick() {
@@ -31,6 +35,9 @@ public class WeatherControllerFX {
         welcomeText.setText("Searching for weather in " + city + "...");
 
         String weatherData = getWeatherDataForCity(city);
+        if (weatherData.equals("Error fetching weather data.")) {
+            vboxContainer.getChildren().clear(); // remove chart, if error occurs
+        }
         String weatherInfo = parseWeatherInfo(weatherData);
         welcomeText.setText("Weather information for " + city + ":\n" + weatherInfo);
     }
@@ -44,11 +51,38 @@ public class WeatherControllerFX {
         }
     }
 
+    private void displayHourlyTemperatureChart(List<Double> hourlyTemperatures, JSONArray hourlyTimeArray) {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        xAxis.setLabel("Time");
+        yAxis.setLabel("Temperature (°C)");
+
+        LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Hourly temperatures");
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Temperature");
+
+        for (int i = 0; i < hourlyTimeArray.length(); i++) {
+            String time = hourlyTimeArray.getString(i);
+            double temperature = hourlyTemperatures.get(i);
+            series.getData().add(new XYChart.Data<>(time, temperature));
+        }
+
+        lineChart.getData().add(series);
+
+        vboxContainer.getChildren().clear(); // clear existing children from chart container
+        vboxContainer.getChildren().add(lineChart); // add LineChart to chart container
+    }
+
     private String parseWeatherInfo(String json) {
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONObject current = jsonObject.getJSONObject("current");
             JSONObject daily = jsonObject.getJSONObject("daily");
+            JSONArray hourlyTimeArray = jsonObject.getJSONObject("hourly").getJSONArray("time");
+            JSONArray hourlyTempArray = jsonObject.getJSONObject("hourly").getJSONArray("temperature_2m");
 
             double temperatureValue = current.getDouble("temperature_2m");
             double precipitationValue = current.getDouble("precipitation");
@@ -60,6 +94,17 @@ public class WeatherControllerFX {
 
             String sunriseTime = daily.getJSONArray("sunrise").getString(0);
             String sunsetTime = daily.getJSONArray("sunset").getString(0);
+
+            List<Double> hourlyTemperatures = new ArrayList<>();
+            StringBuilder hourlyTemperaturesString = new StringBuilder();
+
+            for (int i = 0; i < hourlyTempArray.length(); i++) {
+                double temperature = hourlyTempArray.getDouble(i);
+                hourlyTemperatures.add(temperature);
+                hourlyTemperaturesString.append(String.format("%.1f°C ", temperature));
+            }
+
+            displayHourlyTemperatureChart(hourlyTemperatures, hourlyTimeArray);
 
             return String.format("Current temperature: %.1f °C\nPrecipitation: %.1f\nWeather Code: %d\n" +
                             "Max Temp: %.1f °C\nMin Temp: %.1f °C\nUV Index: %.1f\nSunrise: %s\nSunset: %s",

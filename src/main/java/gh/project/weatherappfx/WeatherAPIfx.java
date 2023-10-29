@@ -84,7 +84,9 @@ public class WeatherAPIfx {
 
         return "https://api.open-meteo.com/v1/forecast?" + coordinates +
                 "&current=temperature_2m,precipitation" +
+                "&hourly=temperature_2m" +
                 "&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max" +
-                "&timezone=Europe%2FBerlin";
+                "&timezone=Europe%2FBerlin" +
+                "&forecast_days=1";
     }
 }
