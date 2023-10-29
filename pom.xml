@@ -16,6 +16,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230618</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>14.0.2.1</version>
@@ -60,7 +66,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>gh.project.weatherappfx/gh.project.weatherappfx.HelloApplication</mainClass>
+                            <mainClass>gh.project.weatherappfx/gh.project.weatherappfx.WeatherAppFX</mainClass>
                         </configuration>
                     </execution>
                 </executions>

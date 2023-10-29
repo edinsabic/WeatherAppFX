@@ -2,15 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="gh.project.weatherappfx.HelloController">
+      fx:controller="gh.project.weatherappfx.WeatherControllerFX">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
+    <Label text="Enter city:"/>
+    <TextField fx:id="cityField" promptText="City Name" />
     <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <Button text="Search" onAction="#onSearchButtonClick"/>
 </VBox>

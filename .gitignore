@@ -15,3 +15,9 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+.idea/libraries/Maven__org_json_json_20230618.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+pom.xml
+WeatherAppFX.iml
+src/main/resources/gh/project/weatherappfx/weather-app.fxml
