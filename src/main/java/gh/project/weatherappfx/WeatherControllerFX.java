@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,19 +28,43 @@ public class WeatherControllerFX {
     private Label welcomeText;
 
     @FXML
+    private VBox rootVBox;
+
+    @FXML
+    public Label weatherInfoLabel;
+
+    @FXML
     private VBox vboxContainer;
 
     @FXML
     protected void onSearchButtonClick() {
         String city = cityField.getText();
-        welcomeText.setText("Searching for weather in " + city + "...");
+
+        if (city.isEmpty()) {
+            welcomeText.setText("Please enter a city.");
+            return;
+        }
+
+        welcomeText.setText(""); // Clear any previous error message
+
+        // Toggle visibility of labels
+        welcomeText.setVisible(false);
+        welcomeText.setManaged(false);
+        weatherInfoLabel.setVisible(true);
 
         String weatherData = getWeatherDataForCity(city);
         if (weatherData.equals("Error fetching weather data.")) {
             vboxContainer.getChildren().clear(); // remove chart, if error occurs
         }
+
         String weatherInfo = parseWeatherInfo(weatherData);
-        welcomeText.setText("Weather information for " + city + ":\n" + weatherInfo);
+
+        weatherInfoLabel.setText(weatherInfo);
+        weatherInfoLabel.getStyleClass().add("weather-info"); // css part, for font
+
+        // Maximize the window after clicking search
+        Stage stage = (Stage) rootVBox.getScene().getWindow();
+        stage.setMaximized(true);
     }
 
     private String getWeatherDataForCity(String city) {
