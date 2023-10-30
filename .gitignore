@@ -1,18 +1,129 @@
-# IntelliJ IDEA files
-.idea/
-
-# Compiled output
+# Maven
 target/
 
-# Maven files
-*.iml
+# IntelliJ IDEA
+.idea/
 
-# OS files
-.DS_Store
-Thumbs.db
+# Compiled class file
+*.class
 
 # Logs
 *.log
+
+# BlueJ files
+.bluej/
+
+# VS Code settings
+.vscode/
+
+# Eclipse settings
+.settings/
+
+# Javadoc folder
+/doc/
+
+# Mac files
+.DS_Store
+
+# Windows Thumbs.db file
+Thumbs.db
+
+# Linux folder config file
+.idea/
+
+# Project specific
+*.iml
+
+# Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# Gradle Wrapper
+gradle/wrapper/gradle-wrapper.jar
+
+# Gradle Files
+.gradle/
+
+# local running next to the project (can be useful for a production system)
+mvnw
+mvnw.cmd
+
+# JAR files (for libraries)
+lib/
+
+# JavaFX settings
+.settings/
+
+# Logs
+log/
+logs/
+
+# Temporary files
+*.tmp
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.bak
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# IntelliJ
+out/
+*.iml
+*.iws
+
+# Sublime text
+*.sublime-workspace
+
+# SASS
+.sass-cache/
+
+# Eclipse
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders/
+
+# Jupyter
+.ipynb_checkpoints
+
+# User-specific files
+.idea/
+*.suo
+*.user
+*.sln.docstates
+*.sln.docstates.cache
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+.history/
 
 target/
 pom.xml.tag
@@ -37,3 +148,5 @@ buildNumber.properties
 pom.xml
 WeatherAppFX.iml
 src/main/resources/gh/project/weatherappfx/weather-app.fxml
+
+# End of https://www.gitignore.io/api/java,intellij
