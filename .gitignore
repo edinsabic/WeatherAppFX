@@ -1,3 +1,19 @@
+# IntelliJ IDEA files
+.idea/
+
+# Compiled output
+target/
+
+# Maven files
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
