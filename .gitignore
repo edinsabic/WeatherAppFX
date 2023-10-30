@@ -125,6 +125,10 @@ $RECYCLE.BIN/
 .vscode/
 .history/
 
+# Compiled files
+/bin/
+/out/
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -150,3 +154,4 @@ WeatherAppFX.iml
 src/main/resources/gh/project/weatherappfx/weather-app.fxml
 
 # End of https://www.gitignore.io/api/java,intellij
+src/main/java/META-INF/MANIFEST.MF

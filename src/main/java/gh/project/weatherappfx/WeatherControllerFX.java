@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -101,16 +102,17 @@ public class WeatherControllerFX {
         String iconPath = "";
 
         switch (weatherCodeValue) {
-            case 0 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/sunny.png";
-            case 45, 48 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy.png";
-            case 66, 67, 71, 73, 75, 77, 85, 86 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/snow.png";
-            case 51, 53, 55, 56, 57, 61, 63, 65, 80, 81, 82 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy.png";
-            case 1, 2, 3 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy_sunny.png";
-            case 95, 96, 99 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/heavy_rain.png";
-            default -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/default.png";
+            case 0 -> iconPath += "gh/project/weatherappfx/weather-icons/sunny.png";
+            case 45, 48 -> iconPath += "gh/project/weatherappfx/weather-icons/cloudy.png";
+            case 66, 67, 71, 73, 75, 77, 85, 86 -> iconPath += "gh/project/weatherappfx/weather-icons/snow.png";
+            case 51, 53, 55, 56, 57, 61, 63, 65, 80, 81, 82 -> iconPath += "gh/project/weatherappfx/weather-icons/rain.png";
+            case 1, 2, 3 -> iconPath += "gh/project/weatherappfx/weather-icons/cloudy_sunny.png";
+            case 95, 96, 99 -> iconPath += "gh/project/weatherappfx/weather-icons/heavy_rain.png";
+            default -> iconPath += "gh/project/weatherappfx/weather-icons/default.png";
         }
 
-        Image image = new Image(new File(iconPath).toURI().toString());
+        InputStream iconStream = getClass().getClassLoader().getResourceAsStream(iconPath);
+        Image image = new Image(iconStream);
         weatherIcon.setImage(image);
     }
 
@@ -127,11 +129,11 @@ public class WeatherControllerFX {
 
     @FXML
     protected void onSearchButtonClick() {
-        String selectedCity = cityComboBox.getValue();
+        weatherInfoLabel.setText("");
 
+        String selectedCity = cityComboBox.getValue();
         if (selectedCity == null || selectedCity.isEmpty()) {
-            welcomeText.setText("Please select a city.");
-            return;
+            selectedCity = cityField.getText();
         }
 
         welcomeText.setText(""); // Clear any previous error message
