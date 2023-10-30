@@ -11,10 +11,15 @@ Is a simple JavaFX application that provides weather information for various cit
 
 ## How to Use
 
+### Option 1
+
+1. Clone the repository.
+2. Simply run the **WeatherAppFX.jar** application.
+
+### Option 2
 1. Clone the repository.
 2. Open the project in your preferred IDE.
 3. Build and run the application.
-4. We'll update this part once I finish and package the final build.
 
 ## Screenshots
 
