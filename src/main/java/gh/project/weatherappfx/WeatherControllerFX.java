@@ -101,49 +101,13 @@ public class WeatherControllerFX {
         String iconPath = "";
 
         switch (weatherCodeValue) {
-            case 0:
-                iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/sunny.png";
-                break;
-            case 45:
-            case 48:
-                iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy.png";
-                break;
-            case 66:
-            case 67:
-            case 71:
-            case 73:
-            case 75:
-            case 77:
-            case 85:
-            case 86:
-                iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/snow.png";
-                break;
-            case 51:
-            case 53:
-            case 55:
-            case 56:
-            case 57:
-            case 61:
-            case 63:
-            case 65:
-            case 80:
-            case 81:
-            case 82:
-                iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy.png";
-                break;
-            case 1:
-            case 2:
-            case 3:
-                iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy_sunny.png";
-                break;
-            case 95:
-            case 96:
-            case 99:
-                iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/heavy_rain.png";
-                break;
-            default:
-                iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/default.png";
-                break;
+            case 0 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/sunny.png";
+            case 45, 48 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy.png";
+            case 66, 67, 71, 73, 75, 77, 85, 86 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/snow.png";
+            case 51, 53, 55, 56, 57, 61, 63, 65, 80, 81, 82 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy.png";
+            case 1, 2, 3 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/cloudy_sunny.png";
+            case 95, 96, 99 -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/heavy_rain.png";
+            default -> iconPath += "src/main/resources/gh/project/weatherappfx/weather-icons/default.png";
         }
 
         Image image = new Image(new File(iconPath).toURI().toString());
